@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://venom23108-hub.github.io/minha-interface/sitemap.xml
