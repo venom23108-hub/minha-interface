@@ -1,58 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Interface</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #101827;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .caixa {
-            max-width: 500px;
-            margin: auto;
-            padding: 35px;
-            background: #1e293b;
-            border-radius: 20px;
-        }
-
-        h1 {
-            color: #38bdf8;
-        }
-
-        button {
-            padding: 14px 25px;
-            background: #0284c7;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background: #0369a1;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafiq Market | Compras online</title>
+<style>
+:root{--orange:#ff6a00;--dark:#202124;--muted:#6b7280;--bg:#f5f6f8;--green:#12805c}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--dark)}
+button,input,select{font:inherit}button{cursor:pointer}
+.top{background:#202124;color:#fff;padding:9px 5%;font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header{background:white;padding:18px 5%;display:flex;align-items:center;gap:20px;flex-wrap:wrap;box-shadow:0 2px 8px #0000000d}
+.logo{font-size:27px;font-weight:800;letter-spacing:-1px;color:var(--orange);white-space:nowrap}.logo span{color:#202124}
+.search{display:flex;flex:1;min-width:230px}.search input{width:100%;padding:13px;border:2px solid var(--orange);border-radius:8px 0 0 8px;outline:none}.search button{border:0;background:var(--orange);color:white;padding:0 20px;border-radius:0 8px 8px 0;font-weight:bold}
+.header-actions{display:flex;gap:14px;align-items:center}.pill{background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px}
+nav{background:#fff;border-top:1px solid #eee;padding:0 5%;display:flex;gap:22px;overflow-x:auto;white-space:nowrap}nav button{border:0;background:none;padding:14px 0;color:#444}nav button:hover{color:var(--orange)}
+.hero{margin:22px auto;max-width:1200px;padding:34px 5%;border-radius:18px;background:linear-gradient(120deg,#252b42,#4c2c65 60%,#ff8a38);color:white;display:flex;align-items:center;justify-content:space-between;gap:20px;overflow:hidden}.hero h1{font-size:clamp(28px,4vw,46px);margin:0 0 12px}.hero p{font-size:17px;max-width:570px;line-height:1.5}.hero .badge{font-size:75px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 18px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.section-head h2{margin:10px 0 16px}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.filters button{border:1px solid #ddd;background:white;border-radius:20px;padding:8px 14px}.filters button.active,.filters button:hover{background:var(--orange);color:white;border-color:var(--orange)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:35px}.card{background:white;border:1px solid #eee;border-radius:12px;overflow:hidden;transition:transform .18s,box-shadow .18s}.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px #00000012}.product-img{height:175px;display:flex;align-items:center;justify-content:center;background:#f8f8f8;font-size:74px}.product-img img{width:100%;height:100%;object-fit:cover}.card-body{padding:14px}.card h3{font-size:15px;line-height:1.35;margin:0 0 9px;min-height:40px}.price{font-size:21px;font-weight:800;color:var(--orange)}.old{font-size:12px;color:#888;text-decoration:line-through;margin-left:6px}.rating{color:#e7a400;font-size:13px;margin:8px 0}.delivery{font-size:12px;color:var(--green);margin:8px 0}.add{border:0;background:var(--orange);color:white;border-radius:7px;padding:10px;width:100%;font-weight:bold}.add:hover{background:#e85f00}.empty{grid-column:1/-1;background:white;padding:30px;border-radius:12px;text-align:center;color:var(--muted)}
+.info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:10px 0 30px}.info div{background:white;border-radius:12px;padding:18px}.info strong{display:block;margin-bottom:6px}.info span{color:var(--muted);font-size:13px;line-height:1.4}
+footer{background:#202124;color:#eee;margin-top:30px;padding:28px 5%;text-align:center;font-size:13px}
+.modal-bg{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:14px;z-index:20}.modal-bg.show{display:flex}.modal{background:white;border-radius:16px;width:min(600px,100%);max-height:90vh;overflow:auto;padding:22px}.modal-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eee;border-radius:50%;width:35px;height:35px;font-size:20px}.cart-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}.qty{display:flex;gap:7px;align-items:center}.qty button{border:1px solid #ddd;background:#fff;border-radius:5px;padding:3px 9px}.total{font-size:22px;font-weight:bold;text-align:right;margin:18px 0}.form{display:grid;gap:12px;margin-top:15px}.form label{font-size:13px;font-weight:bold}.form input,.form select,.form textarea{width:100%;padding:11px;border:1px solid #ccc;border-radius:7px;margin-top:5px}.primary{background:var(--orange);border:0;color:white;padding:12px 16px;border-radius:8px;font-weight:bold}.secondary{background:#f0f0f0;border:0;padding:12px;border-radius:8px}.note{font-size:12px;color:#777;line-height:1.5}.cart-empty{text-align:center;color:#777;padding:20px}
+@media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero .badge{font-size:55px}}
+@media(max-width:620px){header{padding:14px 4%;gap:12px}.logo{font-size:24px}.header-actions{width:100%;justify-content:space-between}.search{order:3;flex-basis:100%}.hero{margin:14px 12px;padding:24px 20px}.hero .badge{font-size:42px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-img{height:130px;font-size:55px}.card-body{padding:10px}.price{font-size:18px}.info{grid-template-columns:1fr}.wrap{padding:0 12px}}
+</style>
 </head>
-
 <body>
+<div class="top"><span>🌍 Entregas em Moçambique e envios internacionais</span><span>Preços em meticais (MT) · Demonstração de loja</span></div>
+<header>
+  <div class="logo">RAFIQ <span>MARKET</span></div>
+  <div class="search"><input id="searchInput" type="search" placeholder="Pesquisar telemóveis, roupa, acessórios..." aria-label="Pesquisar produtos"><button id="searchBtn">Pesquisar</button></div>
+  <div class="header-actions"><button class="pill" id="helpBtn">☎ Contacto</button><button class="pill" id="cartBtn">🛒 Carrinho (<span id="cartCount">0</span>)</button></div>
+</header>
+<nav id="categoryNav">
+  <button class="active" data-cat="Todos">🔥 Todos os produtos</button><button data-cat="Telemóveis">📱 Telemóveis</button><button data-cat="Computadores">💻 Computadores</button><button data-cat="Moda">👕 Moda</button><button data-cat="Calçado">👟 Calçado</button><button data-cat="Acessórios">🎧 Acessórios</button><button data-cat="Casa">🏠 Casa</button>
+</nav>
+<section class="hero">
+  <div><div style="font-weight:bold;color:#ffd5b5;margin-bottom:10px">BEM-VINDO À RAFIQ MARKET</div><h1>Descobre. Escolhe.<br>Compra com confiança.</h1><p>Produtos para o teu dia a dia, com opções de entrega local, nacional e internacional.</p><button class="primary" onclick="document.getElementById('productsTitle').scrollIntoView({behavior:'smooth'})">Explorar produtos →</button></div><div class="badge">🛍️</div>
+</section>
+<main class="wrap">
+  <div class="info"><div>🚚 <strong>Opções de entrega</strong><span>Entrega local, transportadora nacional e envio internacional. O custo e o prazo são confirmados antes da encomenda.</span></div><div>🔒 <strong>Compra informada</strong><span>Consulta os detalhes e confirma o preço final antes de fazer o pedido.</span></div><div>💬 <strong>Encomenda simples</strong><span>Prepara o pedido e envia-o por WhatsApp para confirmar disponibilidade e pagamento.</span></div></div>
+  <div class="section-head"><h2 id="productsTitle">Produtos em destaque</h2><span id="resultCount" style="color:#777;font-size:13px"></span></div>
+  <div class="filters" id="filters"><button class="active" data-cat="Todos">Todos</button><button data-cat="Telemóveis">Telemóveis</button><button data-cat="Computadores">Computadores</button><button data-cat="Moda">Moda</button><button data-cat="Calçado">Calçado</button><button data-cat="Acessórios">Acessórios</button><button data-cat="Casa">Casa</button></div>
+  <div class="grid" id="productGrid"></div>
+</main>
+<footer><strong>RAFIQ MARKET</strong><p>Loja online de demonstração · Moçambique</p><p>Preços, imagens e disponibilidade são ilustrativos. Confirma todos os detalhes antes de pagar.</p></footer>
 
-    <div class="caixa">
-        <h1>Minha Interface 🚀</h1>
-
-        <p>Bem-vindo ao meu primeiro site publicado!</p>
-
-        <button onclick="alert('A interface está a funcionar!')">
-            Testar interface
-        </button>
-    </div>
-
+<div class="modal-bg" id="cartModal"><div class="modal"><div class="modal-head"><h2>🛒 O teu carrinho</h2><button class="close" data-close="cartModal">×</button></div><div id="cartItems"></div><div class="total" id="cartTotal">Total: 0 MT</div><button class="primary" id="checkoutBtn" style="width:100%">Continuar para encomenda</button><p class="note">A encomenda será enviada para confirmação. Este site ainda não processa pagamentos automaticamente.</p></div></div>
+<div class="modal-bg" id="checkoutModal"><div class="modal"><div class="modal-head"><h2>📦 Finalizar encomenda</h2><button class="close" data-close="checkoutModal">×</button></div>
+<form id="orderForm" class="form">
+<label>Nome completo<input name="name" required placeholder="O teu nome"></label>
+<label>Telefone / WhatsApp<input name="phone" required placeholder="+258 ..."></label>
+<label>Província / Cidade<input name="city" required placeholder="Ex.: Nampula"></label>
+<label>Endereço de entrega<textarea name="address" required rows="2" placeholder="Bairro, rua ou ponto de referência"></textarea></label>
+<label>Método de entrega<select name="delivery" required><option value="">Escolher entrega</option><option>Entrega local</option><option>Transportadora nacional</option><option>Envio internacional</option></select></label>
+<label>Método de pagamento<select name="payment" required><option value="">Escolher pagamento</option><option>M-Pesa (confirmar manualmente)</option><option>e-Mola (confirmar manualmente)</option><option>Cartão bancário (a integrar)</option><option>PayPal (a integrar)</option><option>Pagamento na entrega (sujeito a confirmação)</option></select></label>
+<label>Observações (opcional)<textarea name="notes" rows="2" placeholder="Cor, tamanho ou outras informações"></textarea></label>
+<button class="primary" type="submit">Preparar pedido no WhatsApp</button>
+<p class="note">Não introduzas PINs, palavras-passe ou códigos de confirmação. Os pagamentos eletrónicos ainda precisam de integração oficial.</p>
+</form></div></div>
+<div class="modal-bg" id="contactModal"><div class="modal"><div class="modal-head"><h2>Contacto da loja</h2><button class="close" data-close="contactModal">×</button></div><p>Para ativar encomendas por WhatsApp, substitui o número de demonstração no código pelo número comercial da loja, incluindo o indicativo do país, sem o sinal +.</p><p class="note">Por segurança, não recolhemos dados bancários no site.</p></div></div>
+<script>
+const products=[
+{id:1,name:"Smartphone Android 128 GB",cat:"Telemóveis",price:8500,old:10500,emoji:"📱",img:"https://images.unsplash.com/photo-1511703563396-7ccf7f3d2d6b?auto=format&fit=crop&w=800&q=80",rating:"★★★★★",desc:"Modelo ilustrativo · 128 GB"},
+{id:2,name:"Auriculares Bluetooth",cat:"Acessórios",price:650,old:900,emoji:"🎧",img:"https://www.digitalstore.co.ke/cdn/shop/products/ItelT1NeoKT1WirelessEarphone-i2_1000x.webp?v=1665050434",rating:"★★★★☆",desc:"Sem fios · uso diário"},
+{id:3,name:"Computador portátil",cat:"Computadores",price:28500,old:32000,emoji:"💻",img:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80",rating:"★★★★★",desc:"Portátil para estudo e trabalho"},
+{id:4,name:"T-shirt casual",cat:"Moda",price:450,old:600,emoji:"👕",img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Várias cores · tamanhos a confirmar"},
+{id:5,name:"Ténis desportivos",cat:"Calçado",price:1800,old:2300,emoji:"👟",img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Estilo casual · tamanho a confirmar"},
+{id:6,name:"Relógio moderno",cat:"Acessórios",price:1200,old:1600,emoji:"⌚",img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Acessório de estilo"},
+{id:7,name:"Mochila para computador",cat:"Acessórios",price:950,old:1250,emoji:"🎒",img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80",rating:"★★★★★",desc:"Para escola e trabalho"},
+{id:8,name:"Câmara digital",cat:"Acessórios",price:4200,old:5000,emoji:"📷",img:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Produto ilustrativo"},
+{id:9,name:"Lâmpada LED",cat:"Casa",price:180,old:250,emoji:"💡",img:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Iluminação doméstica"},
+{id:10,name:"Teclado e rato",cat:"Computadores",price:1100,old:1450,emoji:"⌨️",img:"https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Conjunto para computador"},
+{id:11,name:"Óculos de sol",cat:"Moda",price:500,old:750,emoji:"🕶️",img:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=800&q=80",rating:"★★★★☆",desc:"Vários estilos"},
+{id:12,name:"Bola de futebol",cat:"Casa",price:900,old:1200,emoji:"⚽",img:"https://images.unsplash.com/photo-1614632537423-1e6c2e7e0f2c?auto=format&fit=crop&w=800&q=80",rating:"★★★★★",desc:"Para lazer e treino"}
+];
+let cart={},category="Todos",query="";
+const fmt=n=>new Intl.NumberFormat("pt-MZ",{maximumFractionDigits:0}).format(n)+" MT";
+const grid=document.getElementById("productGrid");
+function renderProducts(){
+ const shown=products.filter(p=>(category==="Todos"||p.cat===category)&&(p.name+" "+p.cat+" "+p.desc).toLowerCase().includes(query.toLowerCase()));
+ document.getElementById("resultCount").textContent=shown.length+" produto(s)";
+ grid.innerHTML=shown.length?shown.map(p=>`<article class="card"><div class="product-img" role="img" aria-label="${p.name}">${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.parentElement.textContent='${p.emoji}'">` : p.emoji}</div><div class="card-body"><h3>${p.name}</h3><div class="price">${fmt(p.price)} <span class="old">${fmt(p.old)}</span></div><div class="rating">${p.rating}</div><div class="delivery">🚚 Opções de entrega disponíveis</div><p style="font-size:12px;color:#777">${p.desc}</p><button class="add" onclick="addToCart(${p.id})">Adicionar ao carrinho</button></div></article>`).join(""):'<div class="empty">Não encontrámos produtos. Experimenta outra pesquisa.</div>';
+ document.querySelectorAll("[data-cat]").forEach(b=>b.classList.toggle("active",b.dataset.cat===category));
+}
+function addToCart(id){cart[id]=(cart[id]||0)+1;updateCart();const btn=document.getElementById("cartBtn");btn.style.transform="scale(1.04)";setTimeout(()=>btn.style.transform="",180)}
+function updateCart(){
+ const count=Object.values(cart).reduce((a,b)=>a+b,0);document.getElementById("cartCount").textContent=count;
+ const entries=Object.entries(cart);
+ document.getElementById("cartItems").innerHTML=entries.length?entries.map(([id,qty])=>{const p=products.find(x=>x.id===Number(id));return `<div class="cart-row"><div><strong>${p.name}</strong><br><span>${fmt(p.price)} × ${qty}</span></div><div class="qty"><button onclick="changeQty(${id},-1)">−</button><span>${qty}</span><button onclick="changeQty(${id},1)">+</button></div></div>`}).join(""):'<div class="cart-empty">O carrinho está vazio. Adiciona alguns produtos!</div>';
+ const total=entries.reduce((sum,[id,qty])=>sum+products.find(p=>p.id===Number(id)).price*qty,0);document.getElementById("cartTotal").textContent="Total: "+fmt(total);
+}
+function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];updateCart()}
+function openModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+document.getElementById("searchBtn").onclick=()=>{query=document.getElementById("searchInput").value.trim();renderProducts()};
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter"){query=e.target.value.trim();renderProducts()}});
+document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderProducts()});
+document.getElementById("cartBtn").onclick=()=>{updateCart();openModal("cartModal")};
+document.getElementById("helpBtn").onclick=()=>openModal("contactModal");
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+document.querySelectorAll(".modal-bg").forEach(bg=>bg.addEventListener("click",e=>{if(e.target===bg)bg.classList.remove("show")}));
+document.getElementById("checkoutBtn").onclick=()=>{if(!Object.keys(cart).length){alert("O carrinho está vazio.");return}closeModal("cartModal");openModal("checkoutModal")};
+document.getElementById("orderForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const f=new FormData(e.target);const items=Object.entries(cart).map(([id,qty])=>{const p=products.find(x=>x.id===Number(id));return `${p.name} x${qty} — ${fmt(p.price*qty)}`}).join("\n");
+ const total=Object.entries(cart).reduce((sum,[id,qty])=>sum+products.find(p=>p.id===Number(id)).price*qty,0);
+ const msg=`Olá, quero fazer uma encomenda na Rafiq Market.\n\nProdutos:\n${items}\n\nTotal dos produtos: ${fmt(total)} (entrega a confirmar)\nNome: ${f.get("name")}\nTelefone: ${f.get("phone")}\nCidade/Província: ${f.get("city")}\nEndereço: ${f.get("address")}\nEntrega: ${f.get("delivery")}\nPagamento pretendido: ${f.get("payment")}\nObservações: ${f.get("notes")||"Nenhuma"}`;
+ const whatsappNumber="258840000000"; // SUBSTITUI pelo número comercial real, sem +, espaços ou traços.
+ window.open("https://wa.me/"+whatsappNumber+"?text="+encodeURIComponent(msg),"_blank");
+});
+renderProducts();updateCart();
+</script>
 </body>
 </html>
